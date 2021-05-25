@@ -1,0 +1,33 @@
+plugins {
+  id 'java'
+  id 'application'
+  id 'org.openjfx.javafxplugin' version '0.0.9'
+}
+
+repositories {
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    implementation 'com.google.api-client:google-api-client'
+    implementation 'com.google.oauth-client:google-oauth-client-jetty:1.30.6'
+    implementation 'com.google.apis:google-api-services-sheets:v4-rev581-1.25.0'
+    implementation 'com.google.http-client:google-http-client-jackson2'
+}
+
+javafx {
+    version = "11"
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+run {
+    if (javafx.platform.classifier == 'win') {
+        // Temporal fix for Eclipse with JDK 1.8 and Windows 
+        systemProperty "java.library.path", "C:\tmp"
+    }
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+mainClassName = 'simpleWindow.MainApp'
